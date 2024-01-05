@@ -5,8 +5,8 @@
 
 # Site
 title: Snowball
-subtitle: 공부 기록용 블로그
-description: JAVA, Spring Boot, JPA, etc...
+subtitle: 개발 공부 기록용 블로그
+description: backend developer
 author: 🍊
 # Support language: de, en, fr-FR, id, ja, ko, pt-BR, pt, ru, zh-Hans, zh-hk, zh-tw
 language: ko
