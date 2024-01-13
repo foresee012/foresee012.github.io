@@ -3,15 +3,16 @@ layout: page
 type: about
 ---
 
-스스로 공부한 것들을 정리하여 기록합니다.
+<div text-align="center">
 
+성장을 꿈꾸는 백엔드 개발자입니다.  
+스스로 공부한 것들을 정리하여 기록합니다.  
 개인적으로 정리한 것으로, 틀린 내용이 있을 수 있습니다.
 
-#### Contact
-
+#### Contact  
 Email: foresee012@gmail.com
 
-
+</div>
 
 
 
