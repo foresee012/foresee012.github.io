@@ -29,8 +29,10 @@ Spring 프레임워크에 있는 RequestEntity, ResponseEntity를 활용할 수 
 3. Servlet은 HTTP 메시지를 HttpServletRequest 객체에 담는다.
 4. HttpServletRequest 객체의 Body값을 MessageConverter을 통해 Mapping해준다.
 
-즉, HttpServletRequest 객체를 MessageConverter을 이용해 Object로 Mapping해서 내가 설정한 DTO의 형태가 되는 것이다. 응답을 할때도 마찬가지로 반환해준 DTO를 MessageConverter(Json 형식으로 변환할때는 MappingJackson2HttpMessageConverter에서 ObjectMapper을 활용해서 변환됨.)를 통해 body에 Mapping해준다. 사실 값을 받아오는 건 크게 문제가 없고, 내가 최근에 고민했던 문제는 **Response 형식**이다. Status 값을 설정해줘야했는데, 기존에는 Body에 status code값을 따로 같이 보내주는 방법을 사용했었기 때문에 Response 자체의 status를 지정해준적은 없었다. (오류는 Exception Handler 사용했었음.) 하지만 과제 요구사항으로 status 자체를 설정해줘야 할 일이 생겨서, 이걸 어떻게 해야하는지 한참 헤맸던 것 같다.
+즉, HttpServletRequest 객체를 MessageConverter을 이용해 Object로 Mapping해서 내가 설정한 DTO의 형태가 되는 것이다. 응답을 할때도 마찬가지로 반환해준 DTO를 MessageConverter (Json 형식으로 변환할때는  
+MappingJackson2HttpMessageConverter에서 ObjectMapper을 활용해서 변환됨.)를 통해 body에 Mapping해준다. 사실 값을 받아오는 건 크게 문제가 없고, 내가 최근에 고민했던 문제는 **Response 형식**이다. Status 값을 설정해줘야했는데, 기존에는 Body에 status code값을 따로 같이 보내주는 방법을 사용했었기 때문에 Response 자체의 status를 지정해준적은 없었다. (오류는 Exception Handler 사용했었음.) 하지만 과제 요구사항으로 status 자체를 설정해줘야 할 일이 생겨서, 이걸 어떻게 해야하는지 한참 헤맸던 것 같다.
 
 만약 DTO를 반환해준다고 하자. 그러면 이때, Request를 받아오는 것과 마찬가지로 MessageConverter를 통해 DTO를 body에 Mapping해주고 이를 반환해줄 것이다. 즉, HTTP의 status code를 설정해줄 수가 없다. HTTP header나 status code 등을 설정하기 위해서는 **ResponseEntity를 이용해서 (body에는 DTO를 넣어주면 된다.) 반환**해줘야한다. 단, Content-type의 경우에는 다른 설정을 안 해줘도 기본적으로 application/json이 설정되므로 다른 값을 설정해주려면 @GetMapping 등에서 설정해줘야 된다.
 
-응답 형식 등은 서로 합의 하에 설정하면 되지만, 만약 이러한 요건이 있어서 header/status 등을 따로 처리해야한다면 ResponseEntity를 사용해야하고, status만 설정하면 된다면 @ResponseStatus와 Exception Handler을 활용하는 게 좀 더 깔끔할 수도 있다. (개인 취향 차이인듯하지만, 나는 개인적으로 남용할 필요는 굳이 없다고 생각은 한다.)
+응답 형식 등은 서로 합의 하에 설정하면 되지만, 만약 이러한 요건이 있어서 header/status 등을 따로 처리해야한다면  
+ResponseEntity를 사용해야하고, status만 설정하면 된다면 @ResponseStatus와 Exception Handler을 활용하는 게 좀 더 깔끔할 수도 있다. (개인 취향 차이인듯하지만, 나는 개인적으로 남용할 필요는 굳이 없다고 생각은 한다.)
