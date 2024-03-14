@@ -67,10 +67,6 @@ class SecurityConfig() {
                       .anyRequest().authenticated()
                 }
                 .oauth2Login {
-                    it
-                      .successHandler(authenticationSuccessHandler)
-                      .failureHandler(authenticationFailureHandler)
-
                 }
 
         return http.build()
@@ -95,6 +91,6 @@ Consistency. Many code bases switched between the two styles which caused incons
 
 antMatchers 대신에 사용하는 것이 requestMatchers다. requestMatcher(*uri*) 형태로 작성해줘도 되고, requestMatcher(AntPathRequestMatcher(*uri*)) 형태로 작성해줘도도 된다. ```public open fun requestMatchers(vararg patterns: String!)``` 와 ```public open fun requestMatchers(vararg requestMatchers: RequestMatcher!)``` 의 두 시그니처가 모두 존재하기 때문에, AntPathRequestMatcher을 사용해야하는 경우(ex. httpMethod 지정 필요)가 아니면 그냥 string 값을 바로 넣어주면 될 것 같다.
 
-그리고 예시 코드에서 authorizeHttpRequest는 request -> request. (...) 으로 작성했는데, OauthLogin의 경우에는 it을 사용해서 작성했다. 둘 중 어느 방법이어도 상관 없다... (하지만 Lambda DSL 방식을 도입한 이유를 생각해보건대 좀 더 명확한 방법은 전자일 것이다.)
+그리고 예시 코드에서 authorizeHttpRequest는 request -> request. (...) 으로 작성했는데, it. (...) 을 사용해서 작성해도 된다. 둘 중 어느 방법이어도 상관 없다... (하지만 Lambda DSL 방식을 도입한 이유를 생각해보건대 좀 더 명확한 방법은 전자일 것이다.)
 
 이 코드대로 spring을 실행시키면 oauth2가 일단 기본적으로 동작은 할 것이다. (필자는 처음에 안 돼서 도대체 뭐가 문제인지 한참을 헤맸는데 @Bean을 빼먹어서 안 된 거였다... 이런 사소한 실수 때문에 오류가 발생하는 경우가 잦으니 꼭 놓치지 말기를 바란다.) 그러면 기본 설정은 끝났으니, 이 다음부터 커스텀을 시작해보겠다.
